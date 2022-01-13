@@ -49,7 +49,6 @@ contract Ballot {
         _;
     }
 
-    // Events
     // Functions
 
     constructor(string memory _ballotOfficialName, string memory _proposal) {
