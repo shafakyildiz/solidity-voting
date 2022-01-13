@@ -82,7 +82,7 @@ contract Ballot {
     {
         bool found = false;
         if (
-            voterRegister[msg.sender].voterName.length != 0 &&
+            bytes(voterRegister[msg.sender].voterName).length != 0 &&
             !voterRegister[msg.sender].voted
         ) {
             voterRegister[msg.sender].voted = true;
@@ -99,5 +99,8 @@ contract Ballot {
         return found;
     }
 
-    function endVote() public {}
+    function endVote() public inState(State.Voting) onlyOfficial {
+        state = State.Ended;
+        finalResult = countResult;
+    }
 }
